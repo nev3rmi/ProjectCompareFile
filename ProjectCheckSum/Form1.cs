@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,25 +27,59 @@ namespace ProjectCheckSum
             Start();
         }
 
-        
 
-        private void Start() {
+
+        private void Start()
+        {
             // Get List Of File
-            var StartTime = DateTime.Today;
-            Console.Write(StartTime);
-            GetAllFolderAndFile("C:\\");
-            var EndTime = DateTime.Today;
-            Console.Write(EndTime);
+            ConsoleRich("| Scan File:");
+            
+            var StartTime = DateTime.Now;
+            textBox1.Text = StartTime.ToString();
+            GetAllFolderAndFile("T:\\");
+            var EndTime = DateTime.Now;
+            textBox2.Text = EndTime.ToString();
+            
+            ConsoleRich("Done");
+            ConsoleRich("| Show File:");
+            
             ShowWork();
+            
+            ConsoleRich("Done");
         }
 
-        private void ShowWork() {
-            foreach (var File in ListOfFileAndItInfo) {
-                richTextBox1.Text += ("File Name: " + File.FileName + " - File Extension:" + File.FileExtension + " - File SHA:" + File.FileSHA + " - File Location:" + File.FileLocation) + Environment.NewLine; 
+        private void ConsoleRich(string String)
+        {
+            richTextBox1.Text += String + Environment.NewLine;
+        }
+
+        private void ShowWork()
+        {
+            DataTable data = new DataTable();
+
+            //FileInfoClass a = new FileInfoClass();
+
+            //foreach (var b in a.GetType().GetProperties()) {
+            //    data.Columns.Add("FileLocation");
+            //} 
+
+            data.Columns.Add("FileName");
+            data.Columns.Add("FileExtension");
+            data.Columns.Add("FileLocation");
+            data.Columns.Add("FileSHA");
+
+            foreach (FileInfoClass file in ListOfFileAndItInfo)
+            {
+                data.Rows.Add(new Object[] { file.FileName, file.FileExtension, file.FileLocation, file.FileSHA });
             }
+
+            dataGridView1.DataSource = data;
+            dataGridView1.Sort(this.dataGridView1.Columns[3],
+                                    ListSortDirection.Ascending);
         }
 
-        private void DoWork(string filePath) {
+        private void DoWork(string filePath)
+        {
             FileInfoClass myFile = new FileInfoClass();
             myFile.FileSHA = GetSHA1Hash(filePath);
             myFile.FileName = Path.GetFileName(filePath);

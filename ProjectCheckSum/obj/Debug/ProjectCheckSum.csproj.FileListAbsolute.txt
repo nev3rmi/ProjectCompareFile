@@ -7,3 +7,12 @@ C:\Users\rmit\Documents\Visual Studio 2015\Projects\ProjectCheckSum\ProjectCheck
 C:\Users\rmit\Documents\Visual Studio 2015\Projects\ProjectCheckSum\ProjectCheckSum\obj\Debug\ProjectCheckSum.csproj.GenerateResource.Cache
 C:\Users\rmit\Documents\Visual Studio 2015\Projects\ProjectCheckSum\ProjectCheckSum\obj\Debug\ProjectCheckSum.exe
 C:\Users\rmit\Documents\Visual Studio 2015\Projects\ProjectCheckSum\ProjectCheckSum\obj\Debug\ProjectCheckSum.pdb
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\bin\Debug\ProjectCheckSum.exe.config
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.exe
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.pdb
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\bin\Debug\ProjectCheckSum.exe
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\bin\Debug\ProjectCheckSum.pdb
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.csprojResolveAssemblyReference.cache
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.Form1.resources
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.Properties.Resources.resources
+C:\Users\rmit\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.csproj.GenerateResource.Cache
