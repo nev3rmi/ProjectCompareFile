@@ -16,6 +16,8 @@ namespace ProjectCheckSum
     {
         private List<String> listOfFilesToBeEncrypt = new List<string>();
         private List<FileInfoClass> ListOfFileAndItInfo = new List<FileInfoClass>();
+        private string Drives = "T:\\";
+
 
         public Form1()
         {
@@ -32,16 +34,22 @@ namespace ProjectCheckSum
         private void Start()
         {
             // Get List Of File
-            ConsoleRich("| Scan File:");
-            
             var StartTime = DateTime.Now;
+
+            ConsoleRich("|-> Information:");
+            ConsoleRich("Drive: " + Drives);
+            ConsoleRich("Start: " + StartTime);
+
+            ConsoleRich("|-> Scan File:");
             textBox1.Text = StartTime.ToString();
-            GetAllFolderAndFile("T:\\");
+            GetAllFolderAndFile(Drives);
+            
             var EndTime = DateTime.Now;
+            
             textBox2.Text = EndTime.ToString();
             
-            ConsoleRich("Done");
-            ConsoleRich("| Show File:");
+            ConsoleRich("Scan Done - " + EndTime);
+            ConsoleRich("|-> Show File:");
             
             ShowWork();
             
