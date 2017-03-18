@@ -32,24 +32,22 @@ namespace ProjectCheckSum
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            updateDataGridView(true);
+            updateDataGridView();
             
         }
 
-        private void updateDataGridView(bool sort = false)
+        private void updateDataGridView()
         {
             try
             {
                 richTextBox1.Text = DataViewModel.myLog;
                 dataGridView1.DataSource = DataViewModel.myDataTable;
-                if (sort) {
-                    foreach (DataGridViewColumn column in dataGridView1.Columns)
-                    {
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
 
-                        column.SortMode = DataGridViewColumnSortMode.Automatic;
-                    }
-                    dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Ascending);
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
                 }
+                dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Ascending);
             }
             catch (Exception)
             {
