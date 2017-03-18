@@ -11,5 +11,6 @@ namespace ProjectCheckSum.ViewModel
     {
         public static DataTable myDataTable = new DataTable();
         public static string myLog = "";
+        public static int myTotalScanFile = 0;
     }
 }

@@ -13,9 +13,8 @@ namespace ProjectCheckSum.Model
         public static List<String> listOfFilesToBeEncrypt = new List<string>();
         public static List<FileInfoClass> ListOfFileAndItInfo = new List<FileInfoClass>();
 
-        public static int GetAllFolderAndFile(string location)
+        public static void GetAllFolderAndFile(string location)
         {
-            var totalFileScan = 0;
             try
             {
 
@@ -27,7 +26,7 @@ namespace ProjectCheckSum.Model
                     string extension = Path.GetExtension(files[i]);
                     if (Setting.validExtensions.Contains(extension))
                     {
-                        totalFileScan += 1;
+                        DataViewModel.myTotalScanFile += 1;
                         DoWork(files[i]);
                     }
                 }
@@ -41,8 +40,6 @@ namespace ProjectCheckSum.Model
             {
 
             }
-
-            return totalFileScan;
         }
         public static FileStream GetFileStream(string pathName)
         {

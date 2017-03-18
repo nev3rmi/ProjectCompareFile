@@ -54,5 +54,10 @@ namespace ProjectCheckSum
         {
             updateDataGridView();
         }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            textBox1.Text = DataViewModel.myTotalScanFile.ToString();
+        }
     }
 }
