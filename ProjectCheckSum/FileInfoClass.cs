@@ -12,5 +12,7 @@ namespace ProjectCheckSum
         public string FileExtension = null;
         public string FileSHA = null;
         public string FileLocation = null;
+        public string FileSize = null;
+        public string ModifyDate = null;
     }
 }

@@ -16,8 +16,17 @@ namespace ProjectCheckSum
     {
         private List<String> listOfFilesToBeEncrypt = new List<string>();
         private List<FileInfoClass> ListOfFileAndItInfo = new List<FileInfoClass>();
-        private string Drives = "T:\\";
-
+        private string Drives = "D:\\";
+        private string[] validExtensions = new[]{
+                                                    ".txt", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".jpg", ".png", ".csv", ".sql",
+                                                    ".mdb", ".sln", ".php", ".asp", ".aspx", ".html", ".xml", ".psd",
+                                                    ".3gp", ".7z", ".aac", ".ace", ".aif", ".arj", ".asf", ".avi", ".bin", ".bz2", ".gz", ".gzip",
+                                                    ".img", ".iso", ".lzh", ".m4a", ".m4v", ".mkv", ".mov", ".mp3", ".mp4", ".mpa", ".mpe", ".mpeg",
+                                                    ".mpg", ".msi", ".msu", ".ogg", ".ogv", ".pdf", ".plj", ".pps", ".ppt", ".qt", ".r0*", ".r1*",
+                                                    ".ra", ".rar", ".rm", ".rmvb", ".sea", ".sit", ".sitx", ".tar", ".tif", ".tiff", ".wav", ".wma",
+                                                    ".wmv", ".z", ".zip"
+            //, ".exe", ".dll"
+                                                };
 
         public Form1()
         {
@@ -34,31 +43,58 @@ namespace ProjectCheckSum
         private void Start()
         {
             // Get List Of File
-            var StartTime = DateTime.Now;
 
-            ConsoleRich("|-> Information:");
-            ConsoleRich("Drive: " + Drives);
-            ConsoleRich("Start: " + StartTime);
+            ConsoleRich("|-> Information:", true);
+            ConsoleRich("Path to Scan: [ " + Drives + " ]");
+            ConsoleRich("Start: " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"), true);
 
-            ConsoleRich("|-> Scan File:");
-            textBox1.Text = StartTime.ToString();
-            GetAllFolderAndFile(Drives);
-            
-            var EndTime = DateTime.Now;
-            
-            textBox2.Text = EndTime.ToString();
-            
-            ConsoleRich("Scan Done - " + EndTime);
-            ConsoleRich("|-> Show File:");
-            
+
+
+            if (Drives == "All")
+            {
+                ConsoleRich("|-> Scan Drive:", true);
+                ConsoleRich("-> Scan Start - " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
+
+                DriveInfo[] allDrives = DriveInfo.GetDrives();
+                var drive = "";
+                foreach (DriveInfo d in allDrives)
+                {
+                    drive = d.Name;
+                    var StartScan = DateTime.Now;
+                    ConsoleRich("Drive: [ " + drive + " ] -> Start: " + StartScan.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                    GetAllFolderAndFile(drive);
+                    var EndScan = DateTime.Now;
+                    ConsoleRich("Drive: [ " + drive + " ] -> End: " + EndScan.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                    ConsoleRich("|| Total Scan Drive [ " + drive + " ]: " + (EndScan - StartScan).ToString());
+                }
+            }
+            else
+            {
+                ConsoleRich("|-> Scan Path:", true);
+                ConsoleRich("-> Scan Start - " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
+
+                var drives = Drives.Split(',');
+                foreach (string drive in drives)
+                {
+                    var StartScan = DateTime.Now;
+                    ConsoleRich("Path: [ " + drive + " ] -> Start: " + StartScan.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                    GetAllFolderAndFile(drive);
+                    var EndScan = DateTime.Now;
+                    ConsoleRich("Path: [ " + drive + " ] -> End: " + EndScan.ToString("dd/MM/yyyy hh:mm:ss tt"));
+                    ConsoleRich("|| Total Scan Path [ " + drive + " ]: " + (EndScan - StartScan).ToString());
+                }
+            }
+            ConsoleRich("-> Scan Done - " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"), true);
+
+
+            ConsoleRich("|-> Show File:", true);
             ShowWork();
-            
-            ConsoleRich("Done");
+            ConsoleRich("Done", true);
         }
 
-        private void ConsoleRich(string String)
+        private void ConsoleRich(string String, bool secondBreakLine = false)
         {
-            richTextBox1.Text += String + Environment.NewLine;
+            richTextBox1.Text += String + Environment.NewLine + (secondBreakLine == true ? Environment.NewLine : "");
         }
 
         private void ShowWork()
@@ -71,32 +107,74 @@ namespace ProjectCheckSum
             //    data.Columns.Add("FileLocation");
             //} 
 
-            data.Columns.Add("FileName");
-            data.Columns.Add("FileExtension");
-            data.Columns.Add("FileLocation");
-            data.Columns.Add("FileSHA");
+            data.Columns.Add("Name");
+            data.Columns.Add("Extension");
+            data.Columns.Add("Location");
+            data.Columns.Add("SHA");
+            data.Columns.Add("Size");
+            data.Columns.Add("ModifyDate");
 
             foreach (FileInfoClass file in ListOfFileAndItInfo)
             {
-                data.Rows.Add(new Object[] { file.FileName, file.FileExtension, file.FileLocation, file.FileSHA });
+                data.Rows.Add(new Object[] { file.FileName, file.FileExtension, file.FileLocation, file.FileSHA, file.FileSize, file.ModifyDate });
             }
 
             dataGridView1.DataSource = data;
             dataGridView1.Sort(this.dataGridView1.Columns[3],
                                     ListSortDirection.Ascending);
+
         }
 
         private void DoWork(string filePath)
         {
-            FileInfoClass myFile = new FileInfoClass();
-            myFile.FileSHA = GetSHA1Hash(filePath);
-            myFile.FileName = Path.GetFileName(filePath);
-            myFile.FileExtension = Path.GetExtension(filePath);
-            myFile.FileLocation = filePath;
-            ListOfFileAndItInfo.Add(myFile);
-            //myFile = null;
-            // Show It
-            Console.Write("File Name: " + myFile.FileName + " - File Extension:" + myFile.FileExtension + " - File SHA:" + myFile.FileSHA + " - File Location:" + myFile.FileLocation + Environment.NewLine);
+            try
+            {
+                FileInfoClass myFile = new FileInfoClass();
+                var myFileInfo = new System.IO.FileInfo(filePath);
+
+                myFile.FileSHA = GetSHA1Hash(filePath);
+                myFile.FileName = Path.GetFileName(filePath);
+                myFile.FileExtension = Path.GetExtension(filePath);
+                myFile.FileLocation = filePath;
+                try
+                {
+                    myFile.FileSize = BytesToString(myFileInfo.Length);
+                    myFile.ModifyDate = myFileInfo.LastAccessTimeUtc.ToString();
+                }
+                catch (FileNotFoundException e)
+                {
+
+                }
+               
+                ListOfFileAndItInfo.Add(myFile);
+                //myFile = null;
+                // Show It
+                Console.Write(
+                    "File Name: " + myFile.FileName +
+                    " - File Extension:" + myFile.FileExtension +
+                    " - File SHA:" + myFile.FileSHA +
+                    " - File Location:" + myFile.FileLocation +
+                    " - File Size:" + myFile.FileSize +
+                    " - Modify Date:" + myFile.ModifyDate +
+                    Environment.NewLine);
+            }
+            catch (Exception e)
+            {
+
+            }
+            
+            
+        }
+
+        private static String BytesToString(long byteCount)
+        {
+            string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
+            if (byteCount == 0)
+                return "0" + suf[0];
+            long bytes = Math.Abs(byteCount);
+            int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
+            double num = Math.Round(bytes / Math.Pow(1024, place), 1);
+            return (Math.Sign(byteCount) * num).ToString() + suf[place];
         }
 
         private static System.IO.FileStream GetFileStream(string pathName)
@@ -143,33 +221,11 @@ namespace ProjectCheckSum
         {
             try
             {
+
                 string[] files = Directory.GetFiles(location);
                 string[] childDirectories = Directory.GetDirectories(location);
 
-                var validExtensions = new[]
-                {
-                ".txt",
-                ".doc",
-                ".docx",
-                ".xls",
-                ".xlsx",
-                ".ppt",
-                ".pptx",
-                ".odt",
-                ".jpg",
-                ".png",
-                ".csv",
-                ".sql",
-                ".mdb",
-                ".sln",
-                ".php",
-                ".asp",
-                ".aspx",
-                ".html",
-                ".xml",
-                ".psd",
-                ".3gp", ".7z", ".aac", ".ace", ".aif", ".arj", ".asf", ".avi", ".bin", ".bz2", ".gz", ".gzip", ".img", ".iso", ".lzh", ".m4a", ".m4v", ".mkv", ".mov", ".mp3", ".mp4", ".mpa", ".mpe", ".mpeg", ".mpg", ".msi", ".msu", ".ogg", ".ogv", ".pdf", ".plj", ".pps", ".ppt", ".qt", ".r0*", ".r1*", ".ra", ".rar", ".rm", ".rmvb", ".sea", ".sit", ".sitx", ".tar", ".tif", ".tiff", ".wav", ".wma", ".wmv", ".z", ".zip"
-            };
+
 
                 for (int i = 0; i < files.Length; i++)
                 {
@@ -186,6 +242,14 @@ namespace ProjectCheckSum
                 }
             }
             catch (UnauthorizedAccessException)
+            {
+
+            }
+            catch (DirectoryNotFoundException)
+            {
+
+            }
+            catch (FileNotFoundException)
             {
 
             }
