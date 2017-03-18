@@ -112,7 +112,8 @@ namespace ProjectCheckSum.Model
                         var StartScan = DateTime.Now;
                         Log.LogMe("Drive: [ " + drive + " ] -> Start: " + StartScan.ToString("dd/MM/yyyy hh:mm:ss tt"));
                         Log.LogMe(drive + " In Process...");
-                        Files.GetAllFolderAndFile(drive);
+                        int file = Files.GetAllFolderAndFile(drive);
+                        Log.LogMe("Total Scan File: " + file);
                         var EndScan = DateTime.Now;
                         Log.LogMe("Drive: [ " + drive + " ] -> End: " + EndScan.ToString("dd/MM/yyyy hh:mm:ss tt"));
                         Log.LogMe("|| Total Time Scan Drive [ " + drive + " ]: " + (EndScan - StartScan).ToString());
@@ -127,7 +128,8 @@ namespace ProjectCheckSum.Model
                         var StartScan = DateTime.Now;
                         Log.LogMe("Drive/Path: [ " + drive + " ] -> Start: " + StartScan.ToString("dd/MM/yyyy hh:mm:ss tt"));
                         Log.LogMe(drive + " In Process...");
-                        Files.GetAllFolderAndFile(drive);
+                        int file = Files.GetAllFolderAndFile(drive);
+                        Log.LogMe("Total Scan File: " + file);
                         var EndScan = DateTime.Now;
                         Log.LogMe("Drive/Path: [ " + drive + " ] -> End: " + EndScan.ToString("dd/MM/yyyy hh:mm:ss tt"));
                         Log.LogMe("|| Total Time Scan Path [ " + drive + " ]: " + (EndScan - StartScan).ToString());

@@ -30,7 +30,7 @@ namespace ProjectCheckSum.Model
                 strHashData = strHashData.Replace("-", "");
                 strResult = strHashData;
             }
-            catch (System.Exception ex)
+            catch (Exception)
             {
                 //System.Windows.Forms.MessageBox.Show(ex.Message, "Error!",
                 //         System.Windows.Forms.MessageBoxButtons.OK,
