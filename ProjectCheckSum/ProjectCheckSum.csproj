@@ -46,7 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileInfoClass.cs" />
+    <Compile Include="Model\Converter.cs" />
+    <Compile Include="Model\Files.cs" />
+    <Compile Include="Model\Hash.cs" />
+    <Compile Include="Model\Log.cs" />
+    <Compile Include="Model\Setting.cs" />
+    <Compile Include="Model\Show.cs" />
+    <Compile Include="Model\Start.cs" />
+    <Compile Include="ViewModel\DataViewModel.cs" />
+    <Compile Include="ViewModel\FileInfoClass.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +87,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Backup\" />
+    <Folder Include="BusinessLayer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
