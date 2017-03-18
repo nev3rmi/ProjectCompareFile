@@ -8,7 +8,7 @@ namespace ProjectCheckSum.Model
 {
     class Setting
     {
-        public static string Drives = "F:\\";
+        public static string Drives = "All";
         public static string[] validExtensions = new[]{
                                                     ".txt", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".jpg", ".png", ".csv", ".sql",
                                                     ".mdb", ".sln", ".php", ".asp", ".aspx", ".html", ".xml", ".psd",
@@ -17,7 +17,7 @@ namespace ProjectCheckSum.Model
                                                     ".mpg", ".msi", ".msu", ".ogg", ".ogv", ".pdf", ".plj", ".pps", ".ppt", ".qt", ".r0*", ".r1*",
                                                     ".ra", ".rar", ".rm", ".rmvb", ".sea", ".sit", ".sitx", ".tar", ".tif", ".tiff", ".wav", ".wma",
                                                     ".wmv", ".z", ".zip"
-            , ".exe", ".dll"
+            //, ".exe", ".dll"
                                                 };
         //public static string[] validExtensions = new[]{
         //                                            ".txt" };

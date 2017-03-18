@@ -83,12 +83,20 @@ namespace ProjectCheckSum.Model
         private void buildDataTable()
         {
             // Build Header
-            DataViewModel.myDataTable.Columns.Add("Name");
-            DataViewModel.myDataTable.Columns.Add("Extension");
-            DataViewModel.myDataTable.Columns.Add("Location");
-            DataViewModel.myDataTable.Columns.Add("SHA");
-            DataViewModel.myDataTable.Columns.Add("Size");
-            DataViewModel.myDataTable.Columns.Add("ModifyDate");
+            try
+            {
+                DataViewModel.myDataTable.Columns.Add("Name");
+                DataViewModel.myDataTable.Columns.Add("Extension");
+                DataViewModel.myDataTable.Columns.Add("Location");
+                DataViewModel.myDataTable.Columns.Add("SHA");
+                DataViewModel.myDataTable.Columns.Add("Size");
+                DataViewModel.myDataTable.Columns.Add("ModifyDate");
+            }
+            catch (Exception)
+            {
+
+            }
+            
         }
 
         
