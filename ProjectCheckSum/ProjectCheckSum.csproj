@@ -50,7 +50,7 @@
     <Compile Include="Model\Files.cs" />
     <Compile Include="Model\Hash.cs" />
     <Compile Include="Model\Log.cs" />
-    <Compile Include="Model\Setting.cs" />
+    <Compile Include="Setting.cs" />
     <Compile Include="Model\Show.cs" />
     <Compile Include="Model\Start.cs" />
     <Compile Include="ViewModel\DataViewModel.cs" />
