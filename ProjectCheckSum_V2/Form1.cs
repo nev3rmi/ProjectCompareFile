@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjectCheckSum_V2.Model.Start;
 using ProjectCheckSum_V2.ViewModel;
+using System.Threading;
 
 namespace ProjectCheckSum_V2
 {
@@ -29,13 +30,12 @@ namespace ProjectCheckSum_V2
         {
             try
             {
-                richTextBox1.Text = Store.Log;
                 dataGridView1.DataSource = Store.myDataTable;
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
+                //foreach (DataGridViewColumn column in dataGridView1.Columns)
+                //{
 
-                    column.SortMode = DataGridViewColumnSortMode.Automatic;
-                }
+                //    column.SortMode = DataGridViewColumnSortMode.Automatic;
+                //}
                 dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Ascending);
             }
             catch (Exception)
@@ -53,8 +53,12 @@ namespace ProjectCheckSum_V2
         {
             Start start = new Start();
             start.Go();
+            
         }
 
-       
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            richTextBox1.Text = Store.Log;
+        }
     }
 }

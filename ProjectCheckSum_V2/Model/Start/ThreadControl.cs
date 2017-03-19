@@ -1,4 +1,5 @@
-﻿using ProjectCheckSum_V2.Model.Watch;
+﻿using ProjectCheckSum_V2.Model.Converter;
+using ProjectCheckSum_V2.Model.Watch;
 using ProjectCheckSum_V2.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,12 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadThreadBackEnd.Start();
             _loadThreadUI.Start();
 
+            //ThreadBackEnd();
+
         }
 
         public void ThreadBackEnd()
         {
-            Log.Write("|---> Begin To Scan:");
-            Log.Write("|-> Scan Drives");
             // Get Drives
             Thread _loadDrives = new Thread(new ThreadStart(loadDrives));
             _loadDrives.Start();
@@ -36,26 +37,16 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadFolders.Start();
             _loadFolders.Join();
 
-            // Console Folders
-            //Thread _consoleFolder = new Thread(new ThreadStart(consoleFolder));
-            //_consoleFolder.Start();
-            //_consoleFolder.Join();
-
             Log.Write("|-> Scan Files");
             // Get Files
             Thread _loadFiles = new Thread(new ThreadStart(loadFile));
             _loadFiles.Start();
             _loadFiles.Join();
 
-            Log.Write("|-> Build Folders");
-            // Build table
-            Thread _loadTable = new Thread(new ThreadStart(buildDatatable));
-            _loadTable.Start();
-            _loadTable.Join();
-
             Log.Write("|-> Render View");
             // Extract Data
             Thread _extractData = new Thread(new ThreadStart(extractData));
+            _extractData.Name = "ExtractDataToView";
             _extractData.Start();
             _extractData.Join();
 
@@ -65,14 +56,27 @@ namespace ProjectCheckSum_V2.Model.Start
 
         public void ThreadUI()
         {
-
+            Log.Write("|-> Build Tables");
+            // Build table
+            Thread _loadTable = new Thread(new ThreadStart(buildDatatable));
+            _loadTable.Start();
+            _loadTable.Join();
         }
 
         private void extractData()
         {
             foreach (File myFile in Store.ListOfFile)
             {
-                Store.myDataTable.Rows.Add(new Object[] { myFile.fileName, myFile.fileExtension, myFile.fileLocation, myFile.fileSHA, myFile.fileSize, myFile.fileModifyDate });
+                try
+                {
+                    Console.WriteLine(myFile.fileName);
+                    Store.myDataTable.Rows.Add(new Object[] { myFile.fileName, myFile.fileExtension, myFile.fileLocation, myFile.fileSHA, ConvertUnit.BytesToString(myFile.fileSize), myFile.fileModifyDate });
+                }
+                catch (Exception)
+                {
+
+                }
+                
             }
         }
 
@@ -116,21 +120,6 @@ namespace ProjectCheckSum_V2.Model.Start
             //{
             //    threadLoadFiles(folder.path);
             //    //Console.WriteLine(folder.path);
-            //}
-
-        }
-
-        private void consoleFolder()
-        {
-            //foreach (var f in Store.ListOfFolder)
-            //{
-            //    Log.Write("Drives: " + f.label + ", Path: " + f.path);
-            //}
-
-            //var full = Store.ListOfDrive.Join(Store.ListOfFolder, x => x.label, y => y.label, (x, y) => new { a = x, b = y });
-            //foreach (var d in full)
-            //{
-            //    Console.WriteLine("Drives: " + d.a.label + ", Path: " + d.b.path);
             //}
 
         }
