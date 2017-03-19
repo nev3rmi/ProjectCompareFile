@@ -54,6 +54,7 @@
     <Compile Include="Model\Computer\File.cs" />
     <Compile Include="Model\Computer\Folder.cs" />
     <Compile Include="Model\Converter\ConvertUnit.cs" />
+    <Compile Include="Model\Hash\Hash.cs" />
     <Compile Include="Model\Show\Console.cs" />
     <Compile Include="Model\Start\Start.cs" />
     <Compile Include="Model\Start\ThreadControl.cs" />
@@ -87,9 +88,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Hash\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

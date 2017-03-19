@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectCheckSum_V2.Model.Hash;
+using ProjectCheckSum_V2.Model.Converter;
 
 namespace ProjectCheckSum_V2.Model
 {
@@ -15,9 +17,74 @@ namespace ProjectCheckSum_V2.Model
         public string fileExtension { get; set; }
         public DateTime fileModifyDate { get; set; }
         public string fileSHA { get; set; }
+        public string fileLocation { get; set; }
+        
 
         public void GetFile(string path)
         {
+            try
+            {
+                string[] files = Directory.GetFiles(path);
+                Console.WriteLine(path);
+                for (int i = 0; i < files.Length; i++)
+                {
+                    string extension = Path.GetExtension(files[i]);
+                    if (Setting.validExtensions.Contains(extension))
+                    {
+                        DoWork(files[i]);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            
+        }
+
+        internal static FileStream GetFileStream(string pathName)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void DoWork(string filePath)
+        {
+            try
+            {
+                File myFile = new File();
+                var myFileInfo = new System.IO.FileInfo(filePath);
+
+                //myFile.fileSHA = Hash.GetSHA1Hash(filePath);
+                myFile.fileName = Path.GetFileName(filePath);
+                myFile.fileExtension = Path.GetExtension(filePath);
+                myFile.fileLocation = filePath;
+                myFile.fileSize = myFileInfo.Length;
+                myFile.fileModifyDate = myFileInfo.LastAccessTimeUtc;
+
+
+                Store.ListOfFile.Add(myFile);
+
+                //DataViewModel.myDataTable.Rows.Add(new Object[] { myFile.FileName, myFile.FileExtension, myFile.FileLocation, myFile.FileSHA, myFile.FileSize, myFile.ModifyDate });
+
+                //// Show It
+                //Console.Write(
+                //    "File Name: " + myFile.FileName +
+                //    " - File Extension:" + myFile.FileExtension +
+                //    " - File SHA:" + myFile.FileSHA +
+                //    " - File Location:" + myFile.FileLocation +
+                //    " - File Size:" + myFile.FileSize +
+                //    " - Modify Date:" + myFile.ModifyDate +
+                //    Environment.NewLine);
+
+                // Clean it
+                myFile = null;
+
+            }
+            catch (Exception)
+            {
+
+            }
+
 
         }
 

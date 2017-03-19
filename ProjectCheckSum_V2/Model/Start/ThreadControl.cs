@@ -27,6 +27,39 @@ namespace ProjectCheckSum_V2.Model.Start
             Thread _consoleFolder = new Thread(new ThreadStart(consoleFolder));
             _consoleFolder.Start();
             _consoleFolder.Join();
+
+            // Get Files
+            Thread _loadFiles = new Thread(new ThreadStart(loadFile));
+            _loadFiles.Start();
+            _loadFiles.Join();
+
+            Log.Write(Store.ListOfFile.Count().ToString());
+        }
+
+        private void loadFile()
+        {
+            //List<Thread> myThread = new List<Thread>();
+            //foreach (var folder in Store.ListOfFolder)
+            //{
+            //    Thread newThread = new Thread(new ThreadStart(() => threadLoadFiles(folder.path)));
+            //    myThread.Add(newThread);
+            //}
+
+            //for (var i = 0; i < Store.ListOfFolder.Count(); i++)
+            //{
+            //    myThread[i].Start();
+            //}
+            //for (var i = 0; i < Store.ListOfFolder.Count(); i++)
+            //{
+            //    myThread[i].Join();
+            //}
+
+            foreach (Folder folder in Store.ListOfFolder)
+            {
+                threadLoadFiles(folder.path);
+                //Console.WriteLine(folder.path);
+            }
+
         }
 
         private void consoleFolder()
