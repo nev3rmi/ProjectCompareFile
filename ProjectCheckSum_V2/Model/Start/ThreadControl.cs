@@ -13,7 +13,16 @@ namespace ProjectCheckSum_V2.Model.Start
     {
         public void ThreadBegin()
         {
+            Thread _loadThreadBackEnd = new Thread(new ThreadStart(ThreadBackEnd));
+            Thread _loadThreadUI = new Thread(new ThreadStart(ThreadUI));
 
+            _loadThreadBackEnd.Start();
+            _loadThreadUI.Start();
+
+        }
+
+        public void ThreadBackEnd()
+        {
             Log.Write("|---> Begin To Scan:");
             Log.Write("|-> Scan Drives");
             // Get Drives
@@ -52,6 +61,11 @@ namespace ProjectCheckSum_V2.Model.Start
 
             Log.Write("|-> Finish");
             Log.Write("Total Scan Files: " + Store.ListOfFile.Count().ToString());
+        }
+
+        public void ThreadUI()
+        {
+
         }
 
         private void extractData()
