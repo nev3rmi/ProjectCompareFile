@@ -18,11 +18,9 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadDrives.Join();
 
             // Get Drives
-            Thread _loadFolders = new Thread(new ThreadStart(loadFolders));
+            Thread _loadFolders = new Thread(new ThreadStart(loadScan));
             _loadFolders.Start();
             _loadFolders.Join();
-
-            Console.WriteLine(Store.ListOfFolder.Count());
 
         }
 
@@ -32,7 +30,7 @@ namespace ProjectCheckSum_V2.Model.Start
             Store.ListOfDrive = drives.GetAllDrives();
         }
 
-        private void loadFolders()
+        private void loadScan()
         {
             //foreach (Drive d in Store.ListOfDrive)
             //{
@@ -42,65 +40,13 @@ namespace ProjectCheckSum_V2.Model.Start
 
             Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders("B:\\")));
             newthread.Start();
+            newthread.Join();
         }
 
         private void threadLoadFolders(string path)
         {
             Folder folder = new Folder();
-            Store.ListOfFolder = folder.GetSubFolder(path);
-
-            foreach (Folder f in Store.ListOfFolder)
-            {
-                Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(f.path)));
-                newthread.Start();
-            }
+            folder.GetSubFolder(path);
         }
-
-
-        //private void AutoGetFolder()
-        //{
-        //    foreach (var drive in Store.ListOfDrive)
-        //    {
-        //        try
-        //        {
-        //            threadLoadFolders(drive.path);
-        //        }
-        //        catch (Exception ex)
-        //        {
-
-        //        }
-        //    }
-        //}
-
-        //private void threadLoadFolders(string path)
-        //{
-        //    try
-        //    {
-        //        Thread _loadFolders = new Thread(new ThreadStart(() => loadFolders(path)));
-        //        _loadFolders.Start();
-        //        _loadFolders.Join();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return;
-        //    }
-
-        //}
-
-        //private void loadFolders(string path)
-        //{
-        //    File file = new Model.File();
-        //    file.path = path;
-        //    Store.WorkingList.Add(file);
-
-        //    Folder folders = new Folder();
-        //    folders.GetAllFolder();
-        //}
-
-        //private void loadFiles(string path)
-        //{
-        //    File file = new File();
-        //    file.GetAllFiles(path);
-        //}
     }
 }
