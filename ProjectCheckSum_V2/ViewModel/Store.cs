@@ -19,6 +19,7 @@ namespace ProjectCheckSum_V2.ViewModel
         public static string Log = "";
 
         public static DataTable myDataTable = new DataTable();
+        public static DataTable myPreDataTable = new DataTable();
 
         public static int TotalFiles = 0;
 

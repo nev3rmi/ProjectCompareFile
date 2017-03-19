@@ -31,13 +31,15 @@ namespace ProjectCheckSum_V2
         {
             try
             {
-                dataGridView1.DataSource = Store.myDataTable;
-                //foreach (DataGridViewColumn column in dataGridView1.Columns)
-                //{
+                if (Store.myDataTable != null && (Store.myDataTable != Store.myPreDataTable || Store.myPreDataTable == new DataTable())) { 
+                    dataGridView1.DataSource = Store.myDataTable;
+                    foreach (DataGridViewColumn column in dataGridView1.Columns)
+                    {
 
-                //    column.SortMode = DataGridViewColumnSortMode.Automatic;
-                //}
-                dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Ascending);
+                        column.SortMode = DataGridViewColumnSortMode.Automatic;
+                    }
+                    dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Ascending);
+                }
             }
             catch (Exception)
             {
@@ -71,10 +73,19 @@ namespace ProjectCheckSum_V2
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            // set the current caret position to the end
-            richTextBox1.SelectionStart = richTextBox1.Text.Length;
-            // scroll it automatically
-            richTextBox1.ScrollToCaret();
+            if (checkBox1.Checked)
+            {
+                // set the current caret position to the end
+                richTextBox1.SelectionStart = richTextBox1.Text.Length;
+                // scroll it automatically
+                richTextBox1.ScrollToCaret();
+            }
+            
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
