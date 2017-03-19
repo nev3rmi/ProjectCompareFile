@@ -47,7 +47,7 @@ namespace ProjectCheckSum_V2
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            updateView();
+            updateView(); // TODO: Active this one time only do not use it as a timer
         }
 
         private void button1_Click(object sender, EventArgs e)
