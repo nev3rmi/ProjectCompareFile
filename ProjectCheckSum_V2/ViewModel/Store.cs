@@ -9,6 +9,11 @@ namespace ProjectCheckSum_V2.ViewModel
 {
     class Store
     {
-        public List<Drive> ListOfDrive = new List<Drive>();
+        public static List<Drive> ListOfDrive = new List<Drive>();
+        public static List<Folder> ListOfFolder = new List<Folder>();
+        public static List<File> ListOfFile = new List<File>();
+
+        public static List<File> WorkingList = new List<File>();
+
     }
 }

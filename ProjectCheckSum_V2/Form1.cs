@@ -23,6 +23,19 @@ namespace ProjectCheckSum_V2
         {
             Start start = new Start();
             start.Go();
+            timer1.Start();
+        }
+
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            var drive1 = "";
+            foreach (var drive in Store.ListOfDrive)
+            {
+                drive1 += drive.label;
+            }
+            richTextBox1.Text = drive1;
         }
     }
 }

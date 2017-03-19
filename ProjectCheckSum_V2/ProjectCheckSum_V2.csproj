@@ -54,8 +54,9 @@
     <Compile Include="Model\Computer\File.cs" />
     <Compile Include="Model\Computer\Folder.cs" />
     <Compile Include="Model\Converter\ConvertUnit.cs" />
+    <Compile Include="Model\Show\Console.cs" />
     <Compile Include="Model\Start\Start.cs" />
-    <Compile Include="Model\Start\Thread.cs" />
+    <Compile Include="Model\Start\ThreadControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />

@@ -10,6 +10,8 @@ namespace ProjectCheckSum_V2.Model
     class Drive
     {
         public string label { get; set; }
+
+        public string path { get; set; }
         public long totalSize { get; set; }
 
         public List<Drive> GetAllDrives()
@@ -18,10 +20,17 @@ namespace ProjectCheckSum_V2.Model
             
             DriveInfo[] allDrives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in allDrives) {
-                var thisDrive = new Drive();
-                thisDrive.label = drive.Name;
-                thisDrive.totalSize = drive.TotalSize;
-                Drives.Add(thisDrive);
+                try
+                {
+                    var thisDrive = new Drive();
+                    thisDrive.path = drive.Name;
+                    thisDrive.totalSize = drive.TotalSize;
+                    Drives.Add(thisDrive);
+                }
+                catch (Exception)
+                {
+
+                }
             }
             return Drives;
         }

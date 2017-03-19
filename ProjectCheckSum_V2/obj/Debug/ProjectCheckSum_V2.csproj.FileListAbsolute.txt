@@ -1,0 +1,9 @@
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\bin\Debug\ProjectCheckSum_V2.exe.config
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\bin\Debug\ProjectCheckSum_V2.exe
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\bin\Debug\ProjectCheckSum_V2.pdb
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\obj\Debug\ProjectCheckSum_V2.csprojResolveAssemblyReference.cache
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\obj\Debug\ProjectCheckSum_V2.Form1.resources
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\obj\Debug\ProjectCheckSum_V2.Properties.Resources.resources
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\obj\Debug\ProjectCheckSum_V2.csproj.GenerateResource.Cache
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\obj\Debug\ProjectCheckSum_V2.exe
+C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum_V2\obj\Debug\ProjectCheckSum_V2.pdb
