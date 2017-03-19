@@ -3,10 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectCheckSum_V2.Model.Hash;
-using ProjectCheckSum_V2.Model.Converter;
 
 namespace ProjectCheckSum_V2.Model
 {
@@ -42,10 +38,6 @@ namespace ProjectCheckSum_V2.Model
             
         }
 
-        internal static FileStream GetFileStream(string pathName)
-        {
-            throw new NotImplementedException();
-        }
 
         private static void DoWork(string filePath)
         {
@@ -54,7 +46,7 @@ namespace ProjectCheckSum_V2.Model
                 File myFile = new File();
                 var myFileInfo = new System.IO.FileInfo(filePath);
 
-                //myFile.fileSHA = Hash.GetSHA1Hash(filePath);
+                myFile.fileSHA = Hash.GetSHA1Hash(filePath);
                 myFile.fileName = Path.GetFileName(filePath);
                 myFile.fileExtension = Path.GetExtension(filePath);
                 myFile.fileLocation = filePath;
@@ -101,6 +93,12 @@ namespace ProjectCheckSum_V2.Model
 
                 Store.ListOfFile.Add(myFile);
             }
+        }
+
+        public static FileStream GetFileStream(string pathName)
+        {
+            return (new FileStream(pathName, System.IO.FileMode.Open,
+                      FileAccess.Read, System.IO.FileShare.ReadWrite));
         }
     }
 }

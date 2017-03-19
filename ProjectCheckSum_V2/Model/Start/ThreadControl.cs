@@ -38,27 +38,27 @@ namespace ProjectCheckSum_V2.Model.Start
 
         private void loadFile()
         {
-            //List<Thread> myThread = new List<Thread>();
-            //foreach (var folder in Store.ListOfFolder)
-            //{
-            //    Thread newThread = new Thread(new ThreadStart(() => threadLoadFiles(folder.path)));
-            //    myThread.Add(newThread);
-            //}
-
-            //for (var i = 0; i < Store.ListOfFolder.Count(); i++)
-            //{
-            //    myThread[i].Start();
-            //}
-            //for (var i = 0; i < Store.ListOfFolder.Count(); i++)
-            //{
-            //    myThread[i].Join();
-            //}
-
-            foreach (Folder folder in Store.ListOfFolder)
+            List<Thread> myThread = new List<Thread>();
+            foreach (var folder in Store.ListOfFolder)
             {
-                threadLoadFiles(folder.path);
-                //Console.WriteLine(folder.path);
+                Thread newThread = new Thread(new ThreadStart(() => threadLoadFiles(folder.path)));
+                myThread.Add(newThread);
             }
+
+            for (var i = 0; i < Store.ListOfFolder.Count(); i++)
+            {
+                myThread[i].Start();
+            }
+            for (var i = 0; i < Store.ListOfFolder.Count(); i++)
+            {
+                myThread[i].Join();
+            }
+
+            //foreach (Folder folder in Store.ListOfFolder)
+            //{
+            //    threadLoadFiles(folder.path);
+            //    //Console.WriteLine(folder.path);
+            //}
 
         }
 
