@@ -32,11 +32,14 @@ namespace ProjectCheckSum_V2.Model.Start
 
         private void loadFolders()
         {
-            foreach (Drive d in Store.ListOfDrive)
-            {
-                Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(d.path)));
-                newthread.Start();
-            }
+            //foreach (Drive d in Store.ListOfDrive)
+            //{
+            //    Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(d.path)));
+            //    newthread.Start();
+            //}
+
+            Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders("D:\\")));
+            newthread.Start();
         }
 
         private void threadLoadFolders(string path)
