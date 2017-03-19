@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ProjectCheckSum_V2.Model.Start;
 using ProjectCheckSum_V2.ViewModel;
 using System.Threading;
+using ProjectCheckSum_V2.Model.Watch;
 
 namespace ProjectCheckSum_V2
 {
@@ -59,6 +60,13 @@ namespace ProjectCheckSum_V2
         private void timer2_Tick(object sender, EventArgs e)
         {
             richTextBox1.Text = Store.Log;
+            textBox1.Text = Store.TotalFiles.ToString();
+
+            if (Store.ListOfFile.Count() > 0 && !timer1.Enabled)
+            {
+                Log.Write("Begin to Show Data");
+                timer1.Start();
+            }
         }
     }
 }

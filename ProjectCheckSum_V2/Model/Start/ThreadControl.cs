@@ -26,25 +26,32 @@ namespace ProjectCheckSum_V2.Model.Start
 
         public void ThreadBackEnd()
         {
+            // Intro
+            Log.Write("|---> Begin Scan <---|");
+            Log.Write("----------------------");
+            Log.Write("|-> Construct Datatable");
             // Get Drives
+            Log.Write("|-> Scan Drives");
             Thread _loadDrives = new Thread(new ThreadStart(loadDrives));
             _loadDrives.Start();
             _loadDrives.Join();
 
-            // Get Drives
+            // Get Folders
             Log.Write("|-> Scan Folders");
             Thread _loadFolders = new Thread(new ThreadStart(loadScan));
             _loadFolders.Start();
             _loadFolders.Join();
 
-            Log.Write("|-> Scan Files");
+
             // Get Files
+            Log.Write("|-> Scan Files");
             Thread _loadFiles = new Thread(new ThreadStart(loadFile));
             _loadFiles.Start();
             _loadFiles.Join();
 
-            Log.Write("|-> Render View");
+
             // Extract Data
+            Log.Write("|-> Render View");
             Thread _extractData = new Thread(new ThreadStart(extractData));
             _extractData.Name = "ExtractDataToView";
             _extractData.Start();
@@ -56,7 +63,6 @@ namespace ProjectCheckSum_V2.Model.Start
 
         public void ThreadUI()
         {
-            Log.Write("|-> Build Tables");
             // Build table
             Thread _loadTable = new Thread(new ThreadStart(buildDatatable));
             _loadTable.Start();
@@ -69,7 +75,7 @@ namespace ProjectCheckSum_V2.Model.Start
             {
                 try
                 {
-                    Console.WriteLine(myFile.fileName);
+                    //Console.WriteLine(myFile.fileName);
                     Store.myDataTable.Rows.Add(new Object[] { myFile.fileName, myFile.fileExtension, myFile.fileLocation, myFile.fileSHA, ConvertUnit.BytesToString(myFile.fileSize), myFile.fileModifyDate });
                 }
                 catch (Exception)
@@ -98,6 +104,57 @@ namespace ProjectCheckSum_V2.Model.Start
             }
         }
 
+        
+
+        private void loadDrives()
+        {
+            Drive drives = new Drive();
+            Store.ListOfDrive = drives.GetAllDrives();
+        }
+
+        private void loadScan()
+        {
+            List<Thread> myListThread = new List<Thread>();
+
+            if (Setting.Drives == "All")
+            {
+                foreach (Drive d in Store.ListOfDrive)
+                {
+                    Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(d.path)));
+                    newthread.Name = d.path;
+                    myListThread.Add(newthread);
+                }
+            }
+            else
+            {
+                var drives = Setting.Drives.Split(',');
+                foreach (string drive in drives)
+                {
+                    Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(drive)));
+                    newthread.Name = drive;
+                    myListThread.Add(newthread);
+                }
+            }
+
+            for (var i = 0; i < myListThread.Count(); i++)
+            {
+                myListThread[i].Start();
+                Log.Write(myListThread[i].Name);
+
+            }
+            for (var i = 0; i < myListThread.Count(); i++)
+            {
+                myListThread[i].Join();
+            }
+        }
+
+        private void threadLoadFolders(string path)
+        {
+            Folder folder = new Folder();
+            folder.GetSubFolder(path);
+        }
+
+
         private void loadFile()
         {
             List<Thread> myThread = new List<Thread>();
@@ -122,51 +179,6 @@ namespace ProjectCheckSum_V2.Model.Start
             //    //Console.WriteLine(folder.path);
             //}
 
-        }
-
-        private void loadDrives()
-        {
-            Drive drives = new Drive();
-            Store.ListOfDrive = drives.GetAllDrives();
-        }
-
-        private void loadScan()
-        {
-            List<Thread> myListThread = new List<Thread>();
-
-            if (Setting.Drives == "All")
-            {
-                foreach (Drive d in Store.ListOfDrive)
-                {
-                    Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(d.path)));
-                    myListThread.Add(newthread);
-                }
-            }
-            else
-            {
-                var drives = Setting.Drives.Split(',');
-                foreach (string drive in drives)
-                {
-                    Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(drive)));
-                    newthread.Name = drive;
-                    myListThread.Add(newthread);
-                }
-            }
-
-            for (var i = 0; i < myListThread.Count(); i++)
-            {
-                myListThread[i].Start();
-            }
-            for (var i = 0; i < myListThread.Count(); i++)
-            {
-                myListThread[i].Join();
-            }
-        }
-
-        private void threadLoadFolders(string path)
-        {
-            Folder folder = new Folder();
-            folder.GetSubFolder(path);
         }
 
         private void threadLoadFiles(string path)

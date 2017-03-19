@@ -1,4 +1,5 @@
-﻿using ProjectCheckSum_V2.ViewModel;
+﻿using ProjectCheckSum_V2.Model.Watch;
+using ProjectCheckSum_V2.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,13 +28,14 @@ namespace ProjectCheckSum_V2.Model
                     string extension = Path.GetExtension(files[i]);
                     if (Setting.validExtensions.Contains(extension))
                     {
+                        Store.TotalFiles++;
                         DoWork(files[i]);
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Log.Write("Error: " + ex.Message);
             }
             
         }
