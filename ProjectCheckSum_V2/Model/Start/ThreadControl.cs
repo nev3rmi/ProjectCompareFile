@@ -36,7 +36,6 @@ namespace ProjectCheckSum_V2.Model.Start
             {
                 Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(d.path)));
                 newthread.Start();
-                newthread.Join();
             }
         }
 

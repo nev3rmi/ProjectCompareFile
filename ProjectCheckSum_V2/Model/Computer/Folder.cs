@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjectCheckSum_V2.Model
@@ -27,6 +28,9 @@ namespace ProjectCheckSum_V2.Model
                     subFolder.Add(folder);
                     Console.WriteLine(folder.path);
                     GetSubFolder(childDirectories[i]);
+
+                    //Thread myAnotherThread = new Thread(new ThreadStart(() => GetSubFolder(childDirectories[i])));
+                    //myAnotherThread.Start();
                 }
             }
             catch (Exception)
