@@ -25,13 +25,24 @@ namespace ProjectCheckSum_V2.Model.Start
 
             // Console Folders
             Thread _consoleFolder = new Thread(new ThreadStart(consoleFolder));
-
+            _consoleFolder.Start();
+            _consoleFolder.Join();
         }
 
         private void consoleFolder()
         {
+            //foreach (var f in Store.ListOfFolder)
+            //{
+            //    Log.Write("Drives: " + f.label + ", Path: " + f.path);
+            //}
 
-        } 
+            //var full = Store.ListOfDrive.Join(Store.ListOfFolder, x => x.label, y => y.label, (x, y) => new { a = x, b = y });
+            //foreach (var d in full)
+            //{
+            //    Console.WriteLine("Drives: " + d.a.label + ", Path: " + d.b.path);
+            //}
+
+        }
 
         private void loadDrives()
         {
@@ -69,7 +80,6 @@ namespace ProjectCheckSum_V2.Model.Start
             for (var i = 0; i < myListThread.Count(); i++)
             {
                 myListThread[i].Join();
-                //Log.Write(myListThread[i].Name + " - Total File: " + Store.ListOfFolder.Count(x => x.path == myListThread[i].Name));
             }
         }
 
@@ -77,6 +87,12 @@ namespace ProjectCheckSum_V2.Model.Start
         {
             Folder folder = new Folder();
             folder.GetSubFolder(path);
+        }
+
+        private void threadLoadFiles(string path)
+        {
+            File file = new File();
+            file.GetFile(path);
         }
     }
 }

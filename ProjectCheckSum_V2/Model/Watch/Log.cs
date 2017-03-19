@@ -9,7 +9,7 @@ namespace ProjectCheckSum_V2.Model.Watch
 {
     class Log
     {
-        public static void Write(string text)
+        public static void Write(string text = "")
         {
             Store.Log += text + Environment.NewLine;
         }

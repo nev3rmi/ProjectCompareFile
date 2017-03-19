@@ -16,6 +16,11 @@ namespace ProjectCheckSum_V2.Model
         public DateTime fileModifyDate { get; set; }
         public string fileSHA { get; set; }
 
+        public void GetFile(string path)
+        {
+
+        }
+
         public void GetAllFiles(string path)
         {
             var listOfFile = new List<File>();
