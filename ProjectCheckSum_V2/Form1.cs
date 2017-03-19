@@ -24,12 +24,29 @@ namespace ProjectCheckSum_V2
             
         }
 
-        
 
+        public void updateView()
+        {
+            try
+            {
+                richTextBox1.Text = Store.Log;
+                dataGridView1.DataSource = Store.myDataTable;
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
+                }
+                dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Ascending);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            richTextBox1.Text = Store.Log;
+            updateView();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,5 +54,7 @@ namespace ProjectCheckSum_V2
             Start start = new Start();
             start.Go();
         }
+
+       
     }
 }

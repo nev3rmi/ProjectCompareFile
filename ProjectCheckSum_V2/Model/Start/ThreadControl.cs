@@ -13,6 +13,8 @@ namespace ProjectCheckSum_V2.Model.Start
     {
         public void ThreadBegin()
         {
+            
+
             // Get Drives
             Thread _loadDrives = new Thread(new ThreadStart(loadDrives));
             _loadDrives.Start();
@@ -33,7 +35,43 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadFiles.Start();
             _loadFiles.Join();
 
+            // Build table
+            Thread _loadTable = new Thread(new ThreadStart(buildDatatable));
+            _loadTable.Start();
+            _loadTable.Join();
+
+            // Extract Data
+            Thread _extractData = new Thread(new ThreadStart(extractData));
+            _extractData.Start();
+            _extractData.Join();
+
             Log.Write(Store.ListOfFile.Count().ToString());
+        }
+
+        private void extractData()
+        {
+            foreach (File myFile in Store.ListOfFile)
+            {
+                Store.myDataTable.Rows.Add(new Object[] { myFile.fileName, myFile.fileExtension, myFile.fileLocation, myFile.fileSHA, myFile.fileSize, myFile.fileModifyDate });
+            }
+        }
+
+        private void buildDatatable()
+        {
+            try
+            {
+                Store.myDataTable.Columns.Add("Name");
+                Store.myDataTable.Columns.Add("Extension");
+                Store.myDataTable.Columns.Add("Location");
+                Store.myDataTable.Columns.Add("SHA");
+                Store.myDataTable.Columns.Add("Size");
+                Store.myDataTable.Columns.Add("ModifyDate");
+                
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void loadFile()

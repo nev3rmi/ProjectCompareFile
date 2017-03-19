@@ -56,7 +56,7 @@ namespace ProjectCheckSum_V2.Model
 
                 Store.ListOfFile.Add(myFile);
 
-                //DataViewModel.myDataTable.Rows.Add(new Object[] { myFile.FileName, myFile.FileExtension, myFile.FileLocation, myFile.FileSHA, myFile.FileSize, myFile.ModifyDate });
+                
 
                 //// Show It
                 //Console.Write(
