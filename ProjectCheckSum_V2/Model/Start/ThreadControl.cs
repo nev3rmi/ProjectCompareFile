@@ -22,6 +22,8 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadFolders.Start();
             _loadFolders.Join();
 
+            Console.WriteLine(Store.ListOfFolder.Count());
+
         }
 
         private void loadDrives()
@@ -38,7 +40,7 @@ namespace ProjectCheckSum_V2.Model.Start
             //    newthread.Start();
             //}
 
-            Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders("D:\\")));
+            Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders("B:\\")));
             newthread.Start();
         }
 
@@ -46,6 +48,12 @@ namespace ProjectCheckSum_V2.Model.Start
         {
             Folder folder = new Folder();
             Store.ListOfFolder = folder.GetSubFolder(path);
+
+            foreach (Folder f in Store.ListOfFolder)
+            {
+                Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(f.path)));
+                newthread.Start();
+            }
         }
 
 

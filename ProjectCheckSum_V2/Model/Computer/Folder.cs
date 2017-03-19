@@ -27,7 +27,7 @@ namespace ProjectCheckSum_V2.Model
                     folder.path = childDirectories[i];
                     subFolder.Add(folder);
                     Console.WriteLine(folder.path);
-                    GetSubFolder(childDirectories[i]);
+                    //GetSubFolder(childDirectories[i]);
 
                     //Thread myAnotherThread = new Thread(new ThreadStart(() => GetSubFolder(childDirectories[i])));
                     //myAnotherThread.Start();
