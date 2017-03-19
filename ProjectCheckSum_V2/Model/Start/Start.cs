@@ -8,5 +8,9 @@ namespace ProjectCheckSum_V2.Model.Start
 {
     class Start
     {
+        public void Go()
+        {
+
+        }
     }
 }
