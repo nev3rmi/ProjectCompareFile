@@ -23,9 +23,15 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadFolders.Start();
             _loadFolders.Join();
 
-            Log.Write("Test");
+            // Console Folders
+            Thread _consoleFolder = new Thread(new ThreadStart(consoleFolder));
 
         }
+
+        private void consoleFolder()
+        {
+
+        } 
 
         private void loadDrives()
         {
@@ -51,6 +57,7 @@ namespace ProjectCheckSum_V2.Model.Start
                 foreach (string drive in drives)
                 {
                     Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(drive)));
+                    newthread.Name = drive;
                     myListThread.Add(newthread);
                 }
             }
@@ -62,7 +69,7 @@ namespace ProjectCheckSum_V2.Model.Start
             for (var i = 0; i < myListThread.Count(); i++)
             {
                 myListThread[i].Join();
-                Log.Write("Done");
+                //Log.Write(myListThread[i].Name + " - Total File: " + Store.ListOfFolder.Count(x => x.path == myListThread[i].Name));
             }
         }
 
