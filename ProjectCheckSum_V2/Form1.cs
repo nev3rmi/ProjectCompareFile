@@ -70,8 +70,7 @@ namespace ProjectCheckSum_V2
                 timer1.Start();
             }
 
-            // Export Log
-            Log.Export(@"B:\Learn\MyTest.txt");
+            
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -84,11 +83,13 @@ namespace ProjectCheckSum_V2
                 richTextBox1.ScrollToCaret();
             }
             
+            if (checkBox2.Checked)
+            {
+                // Export Log
+                Log.Export(@"B:\Learn\Log.txt");
+            }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

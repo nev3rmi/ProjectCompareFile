@@ -34,7 +34,7 @@ namespace ProjectCheckSum_V2.Model.Watch
                 // Create the file.
                 using (FileStream fs = System.IO.File.Create(path))
                 {
-                    Byte[] info = new UTF8Encoding(true).GetBytes("This is some text in the file.");
+                    Byte[] info = new UTF8Encoding(true).GetBytes(Store.Log);
                     // Add some information to the file.
                     fs.Write(info, 0, info.Length);
                 }
