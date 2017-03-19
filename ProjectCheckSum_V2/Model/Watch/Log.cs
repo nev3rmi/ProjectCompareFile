@@ -11,7 +11,7 @@ namespace ProjectCheckSum_V2.Model.Watch
     {
         public static void Write(string text = "")
         {
-            Store.Log += text + Environment.NewLine;
+            Store.Log += DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") + " => " + text + Environment.NewLine;
         }
     }
 }

@@ -13,39 +13,45 @@ namespace ProjectCheckSum_V2.Model.Start
     {
         public void ThreadBegin()
         {
-            
 
+            Log.Write("|---> Begin To Scan:");
+            Log.Write("|-> Scan Drives");
             // Get Drives
             Thread _loadDrives = new Thread(new ThreadStart(loadDrives));
             _loadDrives.Start();
             _loadDrives.Join();
 
             // Get Drives
+            Log.Write("|-> Scan Folders");
             Thread _loadFolders = new Thread(new ThreadStart(loadScan));
             _loadFolders.Start();
             _loadFolders.Join();
 
             // Console Folders
-            Thread _consoleFolder = new Thread(new ThreadStart(consoleFolder));
-            _consoleFolder.Start();
-            _consoleFolder.Join();
+            //Thread _consoleFolder = new Thread(new ThreadStart(consoleFolder));
+            //_consoleFolder.Start();
+            //_consoleFolder.Join();
 
+            Log.Write("|-> Scan Files");
             // Get Files
             Thread _loadFiles = new Thread(new ThreadStart(loadFile));
             _loadFiles.Start();
             _loadFiles.Join();
 
+            Log.Write("|-> Build Folders");
             // Build table
             Thread _loadTable = new Thread(new ThreadStart(buildDatatable));
             _loadTable.Start();
             _loadTable.Join();
 
+            Log.Write("|-> Render View");
             // Extract Data
             Thread _extractData = new Thread(new ThreadStart(extractData));
             _extractData.Start();
             _extractData.Join();
 
-            Log.Write(Store.ListOfFile.Count().ToString());
+            Log.Write("|-> Finish");
+            Log.Write("Total Scan Files: " + Store.ListOfFile.Count().ToString());
         }
 
         private void extractData()

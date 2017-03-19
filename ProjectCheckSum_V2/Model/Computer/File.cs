@@ -21,7 +21,7 @@ namespace ProjectCheckSum_V2.Model
             try
             {
                 string[] files = Directory.GetFiles(path);
-                Console.WriteLine(path);
+                //Console.WriteLine(path);
                 for (int i = 0; i < files.Length; i++)
                 {
                     string extension = Path.GetExtension(files[i]);

@@ -26,7 +26,7 @@ namespace ProjectCheckSum_V2.Model
                     folder.path = childDirectories[i];
                     folder.label = childDirectories[i].Substring(0, 3);
                     Store.ListOfFolder.Add(folder);
-                    Console.WriteLine(folder.path);
+                    //Console.WriteLine(folder.path);
                     GetSubFolder(childDirectories[i]);
                 }
             }
