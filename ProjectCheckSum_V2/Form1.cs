@@ -69,6 +69,9 @@ namespace ProjectCheckSum_V2
                 Log.Write("Begin to Show Data");
                 timer1.Start();
             }
+
+            // Export Log
+            Log.Export(@"B:\Learn\MyTest.txt");
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
