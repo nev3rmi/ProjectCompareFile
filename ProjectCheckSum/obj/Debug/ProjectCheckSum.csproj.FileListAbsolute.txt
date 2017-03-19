@@ -25,3 +25,12 @@ C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum\obj\Debug\Pro
 C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.Form1.resources
 C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.Properties.Resources.resources
 C:\Users\nev3r\Documents\GitHub\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.csproj.GenerateResource.Cache
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\bin\Debug\ProjectCheckSum.exe.config
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.exe
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.pdb
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\bin\Debug\ProjectCheckSum.exe
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\bin\Debug\ProjectCheckSum.pdb
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.csprojResolveAssemblyReference.cache
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.Form1.resources
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.Properties.Resources.resources
+C:\Users\s3515215\Source\Repos\ProjectCompareFile\ProjectCheckSum\obj\Debug\ProjectCheckSum.csproj.GenerateResource.Cache

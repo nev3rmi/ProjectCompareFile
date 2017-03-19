@@ -8,7 +8,7 @@ namespace ProjectCheckSum.Model
 {
     class Setting
     {
-        public static string Drives = "All";
+        public static string Drives = "H:\\";
         public static string[] validExtensions = new[]{
                                                     ".txt", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".jpg", ".png", ".csv", ".sql",
                                                     ".mdb", ".sln", ".php", ".asp", ".aspx", ".html", ".xml", ".psd",

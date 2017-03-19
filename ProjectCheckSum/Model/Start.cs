@@ -64,8 +64,32 @@ namespace ProjectCheckSum.Model
         //    ConsoleRich("Done", true);
         //}
 
-           
+        public void GoV2()
+        {
+            // First Thread - Scan all first folder.
+            // Foreach folder will create a thread to read.
+            Thread _analysisPath = new Thread(new ThreadStart(analysisPath));
 
+        }
+
+        private void analysisPath()
+        {
+
+        }
+
+        private void listAllFiles()
+        {
+
+        }
+
+        private void checkSHA()
+        {
+
+        }
+           
+        /// <summary>
+        /// ///////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
         public void Go()
         {
             Thread _buildDataTable = new Thread(new ThreadStart(buildDataTable));

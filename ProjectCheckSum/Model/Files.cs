@@ -47,6 +47,25 @@ namespace ProjectCheckSum.Model
                       FileAccess.Read, System.IO.FileShare.ReadWrite));
         }
 
+        private static void AnalysicFiles(string filePath)
+        {
+            try
+            {
+                FileInfoClass myFile = new FileInfoClass();
+                var myFileInfo = new System.IO.FileInfo(filePath);
+
+                myFile.FileName = Path.GetFileName(filePath);
+                myFile.FileExtension = Path.GetExtension(filePath);
+                myFile.FileLocation = filePath;
+                myFile.FileSize = Converter.BytesToString(myFileInfo.Length);
+                myFile.ModifyDate = myFileInfo.LastAccessTimeUtc.ToString();
+
+                ListOfFileAndItInfo.Add(myFile);
+            }catch (Exception){
+
+            }
+        }
+
         private static void DoWork(string filePath)
         {
             try
