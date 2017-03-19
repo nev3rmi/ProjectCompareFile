@@ -15,5 +15,7 @@ namespace ProjectCheckSum_V2.ViewModel
 
         public static List<File> WorkingList = new List<File>();
 
+        public static string Log = "";
+
     }
 }

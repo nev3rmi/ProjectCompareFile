@@ -8,5 +8,6 @@ namespace ProjectCheckSum_V2
 {
     class Setting
     {
+        public readonly static string Drives = "G:\\,E:\\"; 
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Model\Show\Console.cs" />
     <Compile Include="Model\Start\Start.cs" />
     <Compile Include="Model\Start\ThreadControl.cs" />
+    <Compile Include="Model\Watch\Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />

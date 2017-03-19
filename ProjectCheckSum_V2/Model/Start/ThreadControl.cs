@@ -1,4 +1,5 @@
-﻿using ProjectCheckSum_V2.ViewModel;
+﻿using ProjectCheckSum_V2.Model.Watch;
+using ProjectCheckSum_V2.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadFolders.Start();
             _loadFolders.Join();
 
+            Log.Write("Test");
+
         }
 
         private void loadDrives()
@@ -32,15 +35,35 @@ namespace ProjectCheckSum_V2.Model.Start
 
         private void loadScan()
         {
-            //foreach (Drive d in Store.ListOfDrive)
-            //{
-            //    Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(d.path)));
-            //    newthread.Start();
-            //}
+            List<Thread> myListThread = new List<Thread>();
 
-            Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders("B:\\")));
-            newthread.Start();
-            newthread.Join();
+            if (Setting.Drives == "All")
+            {
+                foreach (Drive d in Store.ListOfDrive)
+                {
+                    Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(d.path)));
+                    myListThread.Add(newthread);
+                }
+            }
+            else
+            {
+                var drives = Setting.Drives.Split(',');
+                foreach (string drive in drives)
+                {
+                    Thread newthread = new Thread(new ThreadStart(() => threadLoadFolders(drive)));
+                    myListThread.Add(newthread);
+                }
+            }
+
+            for (var i = 0; i < myListThread.Count(); i++)
+            {
+                myListThread[i].Start();
+            }
+            for (var i = 0; i < myListThread.Count(); i++)
+            {
+                myListThread[i].Join();
+                Log.Write("Done");
+            }
         }
 
         private void threadLoadFolders(string path)
