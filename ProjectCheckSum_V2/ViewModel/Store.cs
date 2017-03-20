@@ -21,6 +21,8 @@ namespace ProjectCheckSum_V2.ViewModel
         public static DataTable myDataTable = new DataTable();
         public static DataTable myPreDataTable = new DataTable();
 
+        public static List<Folder> ListOfSysFolder = new List<Folder>();
+
         public static int TotalFiles = 0;
 
     }

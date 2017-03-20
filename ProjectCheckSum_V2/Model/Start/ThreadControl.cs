@@ -42,6 +42,12 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadFolders.Start();
             _loadFolders.Join();
 
+            // Get Folders
+            //Log.Write("|-> Clean System Folders");
+            //Thread _unloadSysFolders = new Thread(new ThreadStart(RemoveSysFolder));
+            //_unloadSysFolders.Start();
+            //_unloadSysFolders.Join();
+
 
             // Get Files
             Log.Write("|-> Scan Files");
@@ -154,6 +160,28 @@ namespace ProjectCheckSum_V2.Model.Start
             folder.GetSubFolder(path);
         }
 
+        private void RemoveSysFolder()
+        {
+            //    Folder folder = new Folder();
+            //    foreach (Folder f in Store.ListOfFolder)
+            //    {
+
+            //    }
+
+            foreach (var i in Setting.folderToRemove)
+            {
+
+            }
+
+            //var check = Store.ListOfFolder.Contains("");
+
+        }
+
+        private void threadRemoveSysFolder(string path)
+        {
+            Folder folder = new Folder();
+            folder.RemoveFolder(path);
+        }
 
         private void loadFile()
         {

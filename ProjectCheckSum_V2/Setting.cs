@@ -8,7 +8,7 @@ namespace ProjectCheckSum_V2
 {
     class Setting
     {
-        public readonly static string Drives = "All";
+        public readonly static string Drives = "B:\\,F:\\";
         public static string[] validExtensions = new[]{
                                                     ".txt", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".jpg", ".png", ".csv", ".sql",
                                                     ".mdb", ".sln", ".php", ".asp", ".aspx", ".html", ".xml", ".psd",
@@ -19,5 +19,17 @@ namespace ProjectCheckSum_V2
                                                     ".wmv", ".z", ".zip"
             //, ".exe", ".dll"
                                                 };
+        public static string[] folderToRemove = new[]
+        {
+            "$RECYCLE.BIN",
+            "System Volume Information",
+            "Documents and Settings",
+            "MSOCache",
+            "PerfLogs",
+            "PerfLogs\\Admin",
+            "Program Files",
+            "ProgramData",
+            " "
+        };
     }
 }
