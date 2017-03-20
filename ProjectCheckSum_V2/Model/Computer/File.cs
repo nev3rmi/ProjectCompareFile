@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace ProjectCheckSum_V2.Model
 {
@@ -23,15 +24,43 @@ namespace ProjectCheckSum_V2.Model
             {
                 string[] files = Directory.GetFiles(path);
                 //Console.WriteLine(path);
+                List<Thread> myThread = new List<Thread>();
+
                 for (int i = 0; i < files.Length; i++)
                 {
                     string extension = Path.GetExtension(files[i]);
                     if (Setting.validExtensions.Contains(extension))
                     {
                         Store.TotalFiles++;
-                        DoWork(files[i]);
+
+                        //Console.WriteLine(files[i]);
+
+                        //try
+                        //{
+                        //    Thread newThread = new Thread(
+                        //        new ThreadStart(() => DoWork(files[i]))
+                        //    );
+                        //    newThread.Name = files[i];
+                        //    myThread.Add(newThread);
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    Log.Write("Cannot Thread File: " + files[i] + "-> Error: " + ex.Message);
+                            FindFiles(files[i]);
+                        //}
+                        
                     }
                 }
+                //for (var i = 0; i < myThread.Count(); i++)
+                //{
+                //    myThread[i].Start();
+                //    Log.Write("Process: "+ myThread[i].Name);
+                //}
+                //for (var i = 0; i < myThread.Count(); i++)
+                //{
+                //    myThread[i].Join();
+                //    Log.Write("Done: "+ myThread[i].Name);
+                //}
             }
             catch (Exception ex)
             {
@@ -40,8 +69,48 @@ namespace ProjectCheckSum_V2.Model
             
         }
 
+        public static void FindFiles(string filePath)
+        {
+            try
+            {
+                File myFile = new File();
+                var myFileInfo = new System.IO.FileInfo(filePath);
 
-        private static void DoWork(string filePath)
+                //myFile.fileSHA = Hash.GetSHA1Hash(filePath);
+                myFile.fileName = Path.GetFileName(filePath);
+                //myFile.fileExtension = Path.GetExtension(filePath);
+                myFile.fileLocation = filePath;
+                myFile.fileSize = myFileInfo.Length;
+                //myFile.fileModifyDate = myFileInfo.LastAccessTimeUtc;
+
+
+                Store.WorkingList.Add(myFile);
+                
+
+
+                //// Show It
+                //Console.Write(
+                //    "File Name: " + myFile.FileName +
+                //    " - File Extension:" + myFile.FileExtension +
+                //    " - File SHA:" + myFile.FileSHA +
+                //    " - File Location:" + myFile.FileLocation +
+                //    " - File Size:" + myFile.FileSize +
+                //    " - Modify Date:" + myFile.ModifyDate +
+                //    Environment.NewLine);
+
+                // Clean it
+                myFile = null;
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+        }
+
+        public static void DoWork(string filePath)
         {
             try
             {

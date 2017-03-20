@@ -3,6 +3,7 @@ using ProjectCheckSum_V2.Model.Watch;
 using ProjectCheckSum_V2.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -55,6 +56,12 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadFiles.Start();
             _loadFiles.Join();
 
+            // Get Files
+            Log.Write("|-> Get SHA");
+            Thread _loadFilesSHA = new Thread(new ThreadStart(loadFileSHA));
+            _loadFilesSHA.Start();
+            _loadFilesSHA.Join();
+
 
             // Extract Data
             Log.Write("|-> Render View");
@@ -64,7 +71,7 @@ namespace ProjectCheckSum_V2.Model.Start
             _extractData.Join();
 
             Log.Write("|-> Finish");
-            Log.Write("Total Scan Files: " + Store.ListOfFile.Count().ToString());
+            Log.Write("Total Scan Successful Files: " + Store.ListOfFile.Count().ToString());
         }
 
         public void ThreadUI()
@@ -90,6 +97,33 @@ namespace ProjectCheckSum_V2.Model.Start
                 }
                 
             }
+        }
+
+        private void loadFileSHA()
+        {
+            List<Thread> myThread = new List<Thread>();
+            foreach (File file in Store.WorkingList)
+            {
+                Thread newThread = new Thread(new ThreadStart(() => threadFileSHA(file.fileLocation)));
+                newThread.Name = file.fileName;
+                myThread.Add(newThread);
+            }
+
+            for (var i = 0; i < myThread.Count(); i++)
+            {
+                myThread[i].Start();
+                Log.Write("Process: " + myThread[i].Name);
+            }
+            for (var i = 0; i < myThread.Count(); i++)
+            {
+                myThread[i].Join();
+                Log.Write("Done: " + myThread[i].Name);
+            }
+        }
+
+        private void threadFileSHA(string path)
+        {
+            File.DoWork(path);
         }
 
         private void buildDatatable()
