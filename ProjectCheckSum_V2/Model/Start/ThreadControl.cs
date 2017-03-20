@@ -62,6 +62,11 @@ namespace ProjectCheckSum_V2.Model.Start
             _loadFilesSHA.Start();
             _loadFilesSHA.Join();
 
+            // Cleaning
+            Log.Write("|-> Cleaning");
+            Thread _cleaning = new Thread(new ThreadStart(Cleaning));
+            _cleaning.Start();
+            _cleaning.Join();
 
             // Extract Data
             Log.Write("|-> Render View");
@@ -95,7 +100,7 @@ namespace ProjectCheckSum_V2.Model.Start
                 {
 
                 }
-                
+
             }
         }
 
@@ -111,15 +116,42 @@ namespace ProjectCheckSum_V2.Model.Start
 
             for (var i = 0; i < myThread.Count(); i++)
             {
-                myThread[i].Start();
+                Store.ProcessFile++;
+                CalculateCurrent();
                 Log.Write("Process: " + myThread[i].Name);
+                myThread[i].Start();
             }
             for (var i = 0; i < myThread.Count(); i++)
             {
-                myThread[i].Join();
+                Store.DoneFile++;
+                CalculateCurrent();
                 Log.Write("Done: " + myThread[i].Name);
+                myThread[i].Join();
             }
         }
+
+        private void Cleaning()
+        {
+            Store.CurrentMyWorkingIs = 100;
+            Store.TotalWorking = 0;
+            Store.CurrentWorking = 0;
+            Store.WorkingList = null;
+            Store.ListOfFolder = null;
+            Store.ListOfDrive = null;
+        }
+
+        private void CalculateCurrent()
+        {
+            //Store.TotalWorking = 100;/*Store.TotalFiles * 2;*/
+            //Store.CurrentWorking = 50;/*Store.DoneFile + Store.ProcessFile;
+            //                           //Store.Current += (Store.CurrentWorking / Store.TotalWorking) * 100 ;
+            //Store.CurrentMyWorkingIs = (Store.CurrentWorking / Store.TotalWorking) * 100;
+
+            Store.TotalWorking = Store.TotalFiles * 2;
+            Store.CurrentWorking = Store.DoneFile + Store.ProcessFile;
+            Store.CurrentMyWorkingIs = (Store.CurrentWorking * 100 / Store.TotalWorking);
+
+            }
 
         private void threadFileSHA(string path)
         {
@@ -136,7 +168,7 @@ namespace ProjectCheckSum_V2.Model.Start
                 Store.myDataTable.Columns.Add("SHA");
                 Store.myDataTable.Columns.Add("Size");
                 Store.myDataTable.Columns.Add("ModifyDate");
-                
+
             }
             catch (Exception)
             {
@@ -144,7 +176,7 @@ namespace ProjectCheckSum_V2.Model.Start
             }
         }
 
-        
+
 
         private void loadDrives()
         {

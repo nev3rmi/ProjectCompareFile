@@ -39,6 +39,9 @@ namespace ProjectCheckSum_V2
                         column.SortMode = DataGridViewColumnSortMode.Automatic;
                     }
                     dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Ascending);
+
+                    // Progress Bar
+                    progressBar1.Value = Store.CurrentMyWorkingIs;
                 }
             }
             catch (Exception)
@@ -50,7 +53,13 @@ namespace ProjectCheckSum_V2
         private void timer1_Tick(object sender, EventArgs e)
         {
             updateView(); // TODO: Active this one time only do not use it as a timer
+
+            //Thread newThread = new Thread(new ThreadStart(CalculateCurrent));
+            //newThread.Start();
+
         }
+
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -69,8 +78,6 @@ namespace ProjectCheckSum_V2
                 Log.Write("Begin to Show Data");
                 timer1.Start();
             }
-
-            
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -90,6 +97,9 @@ namespace ProjectCheckSum_V2
             }
         }
 
-        
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

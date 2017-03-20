@@ -24,6 +24,14 @@ namespace ProjectCheckSum_V2.ViewModel
         public static List<Folder> ListOfSysFolder = new List<Folder>();
 
         public static int TotalFiles = 0;
+        public static int ProcessFile = 0;
+        public static int DoneFile = 0;
+        public static double ProcessBarValue = 0;
+
+        // Store
+        public static int TotalWorking = 0;
+        public static int CurrentWorking = 0;
+        public static int CurrentMyWorkingIs = 0;
 
     }
 }
